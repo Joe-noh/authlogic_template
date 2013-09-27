@@ -1,9 +1,18 @@
 AuthlogicTemplate::Application.routes.draw do
+
+  resources :users, only: :create
+  get 'signup' => 'users#new'
+  get 'show'   => 'users#show'
+
+  resource :user_session, only: :create
+  get    'login'  => 'user_sessions#new'
+  delete 'logout' => 'user_sessions#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'users#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -39,7 +48,7 @@ AuthlogicTemplate::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
